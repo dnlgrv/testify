@@ -1,7 +1,12 @@
 {
   "name": "testify",
-  "displayName": "testify",
+  "displayName": "Testify",
   "description": "Test commands for Ruby",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dnlgrv/testify.git"
+  },
+  "license": "MIT",
   "version": "0.0.1",
   "engines": {
     "vscode": "^1.78.0"
@@ -20,6 +25,7 @@
     ]
   },
   "scripts": {
+    "vscode:package": "vsce package",
     "vscode:prepublish": "npm run compile",
     "compile": "tsc -p ./",
     "watch": "tsc -watch -p ./",
