@@ -22,15 +22,15 @@
     "commands": [
       {
         "command": "testify.testFile",
-        "title": "Run current test file"
+        "title": "Testify: Run current test file"
       },
       {
         "command": "testify.testLast",
-        "title": "Run the last test you ran"
+        "title": "Testify: Run the last test you ran"
       },
       {
         "command": "testify.testLine",
-        "title": "Run test at current line"
+        "title": "Testify: Run test at current line"
       }
     ],
     "configuration": {
