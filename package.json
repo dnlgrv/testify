@@ -30,8 +30,8 @@
           "type": "string",
           "default": "integrated",
           "description": "The terminal application to run your test commands",
-          "enum": ["integrated", "terminal", "iterm2"],
-          "enumItemLabels": ["Integrated", "Terminal.app", "iTerm2.app"]
+          "enum": ["integrated", "terminal", "iterm"],
+          "enumItemLabels": ["Integrated", "Terminal (OSX)", "iTerm2 (OSX)"]
         }
       }
     }
