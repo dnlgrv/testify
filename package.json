@@ -21,6 +21,10 @@
       {
         "command": "testify.execute",
         "title": "Execute any command"
+      },
+      {
+        "command": "testify.testFile",
+        "title": "Run current test file"
       }
     ],
     "configuration": {

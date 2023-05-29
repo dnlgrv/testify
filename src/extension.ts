@@ -14,32 +14,42 @@ export function activate(context: vscode.ExtensionContext) {
       prompt: "Command you would like to execute"
     }).then(cmd => {
       if (cmd) {
-        run(cmd, settings.terminalTarget());
+        run(cmd);
       }
     });
   });
 
+  let testFile = vscode.commands.registerCommand("testify.testFile", () => {
+    let fileName = vscode.window.activeTextEditor?.document.fileName;
+
+    if (fileName) {
+      let relativePath = vscode.workspace.asRelativePath(fileName);
+      run(`bundle exec rspec ${relativePath}`);
+    }
+  });
+
   context.subscriptions.push(execute);
+  context.subscriptions.push(testFile);
 }
 
 // This method is called when your extension is deactivated
 export function deactivate() {}
 
-function run(cmd: string, target: Terminal) {
-  switch (target) {
+function run(cmd: string) {
+  switch (settings.terminalTarget()) {
     case "integrated":
       runInIntegratedTerminal(cmd);
       break;
     case "iterm":
-      runInIterm(cmd, "iTerm");
+      runInIterm(cmd);
       break;
     case "terminal":
-      runInTerminal(cmd, "Terminal");
+      runInTerminal(cmd);
       break;
   }
 }
 
-function runInIterm(cmd: string, appName: string) {
+function runInIterm(cmd: string) {
   const externalCmd =
     `osascript ` +
     ` -e 'tell app "iTerm2"' ` +
@@ -49,7 +59,7 @@ function runInIterm(cmd: string, appName: string) {
   exec(externalCmd);
 }
 
-function runInTerminal(cmd: string, appName: string) {
+function runInTerminal(cmd: string) {
   const externalCmd =
     `osascript ` +
     ` -e 'tell app "Terminal"' ` +
