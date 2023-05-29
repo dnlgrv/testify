@@ -1,12 +1,9 @@
-// The module 'vscode' contains the VS Code extensibility API
-// Import the module and reference it with the alias vscode in your code below
 import * as vscode from "vscode";
-import settings from "./settings";
-import type { Terminal } from "./settings";
 import { exec } from "child_process";
 
-// This method is called when your extension is activated
-// Your extension is activated the very first time the command is executed
+import settings from "./settings";
+import { recall, remember } from "./memory";
+
 export function activate(context: vscode.ExtensionContext) {
   let testFile = vscode.commands.registerCommand("testify.testFile", () => {
     let fileName = vscode.window.activeTextEditor?.document.fileName;
@@ -14,6 +11,14 @@ export function activate(context: vscode.ExtensionContext) {
     if (fileName) {
       let relativePath = vscode.workspace.asRelativePath(fileName);
       run(`bundle exec rspec ${relativePath}`);
+    }
+  });
+
+  let testLast = vscode.commands.registerCommand("testify.testLast", () => {
+    let cmd = recall();
+
+    if (cmd) {
+      run(cmd);
     }
   });
 
@@ -33,6 +38,7 @@ export function activate(context: vscode.ExtensionContext) {
   });
 
   context.subscriptions.push(testFile);
+  context.subscriptions.push(testLast);
   context.subscriptions.push(testLine);
 }
 
@@ -51,6 +57,8 @@ function run(cmd: string) {
       runInTerminal(cmd);
       break;
   }
+
+  remember(cmd);
 }
 
 function runInIterm(cmd: string) {

@@ -23,6 +23,10 @@
         "title": "Run current test file"
       },
       {
+        "command": "testify.testLast",
+        "title": "Run the last test you ran"
+      },
+      {
         "command": "testify.testLine",
         "title": "Run test at current line"
       }
