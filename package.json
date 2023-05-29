@@ -21,6 +21,10 @@
       {
         "command": "testify.testFile",
         "title": "Run current test file"
+      },
+      {
+        "command": "testify.testLine",
+        "title": "Run test at current line"
       }
     ],
     "configuration": {

@@ -17,7 +17,23 @@ export function activate(context: vscode.ExtensionContext) {
     }
   });
 
+  let testLine = vscode.commands.registerCommand("testify.testLine", () => {
+    let editor = vscode.window.activeTextEditor;
+    if (!editor) { return; };
+
+    let fileName = editor.document.fileName;
+    if (fileName) {
+      let relativePath = vscode.workspace.asRelativePath(fileName);
+
+      let line = editor.selection.active.line;
+      editor.document.save();
+
+      run(`bundle exec rspec ${relativePath}:${line}`);
+    }
+  });
+
   context.subscriptions.push(testFile);
+  context.subscriptions.push(testLine);
 }
 
 // This method is called when your extension is deactivated
