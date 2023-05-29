@@ -8,17 +8,6 @@ import { exec } from "child_process";
 // This method is called when your extension is activated
 // Your extension is activated the very first time the command is executed
 export function activate(context: vscode.ExtensionContext) {
-  let execute = vscode.commands.registerCommand("testify.execute", () => {
-    vscode.window.showInputBox({
-      placeHolder: "bundle exec rspec spec",
-      prompt: "Command you would like to execute"
-    }).then(cmd => {
-      if (cmd) {
-        run(cmd);
-      }
-    });
-  });
-
   let testFile = vscode.commands.registerCommand("testify.testFile", () => {
     let fileName = vscode.window.activeTextEditor?.document.fileName;
 
@@ -28,7 +17,6 @@ export function activate(context: vscode.ExtensionContext) {
     }
   });
 
-  context.subscriptions.push(execute);
   context.subscriptions.push(testFile);
 }
 
