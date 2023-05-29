@@ -19,10 +19,22 @@
   "contributes": {
     "commands": [
       {
-        "command": "testify.helloWorld",
-        "title": "Hello World"
+        "command": "testify.execute",
+        "title": "Execute any command"
       }
-    ]
+    ],
+    "configuration": {
+      "title": "Testify",
+      "properties": {
+        "testify.terminalTarget": {
+          "type": "string",
+          "default": "integrated",
+          "description": "The terminal application to run your test commands",
+          "enum": ["integrated", "terminal", "iterm2"],
+          "enumItemLabels": ["Integrated", "Terminal.app", "iTerm2.app"]
+        }
+      }
+    }
   },
   "scripts": {
     "vscode:package": "vsce package",
