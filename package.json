@@ -21,6 +21,10 @@
   "contributes": {
     "commands": [
       {
+        "command": "testify.forgetLast",
+        "title": "Testify: Forget the last test you ran"
+      },
+      {
         "command": "testify.testFile",
         "title": "Testify: Run current test file"
       },

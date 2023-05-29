@@ -2,9 +2,13 @@ import * as vscode from "vscode";
 import { exec } from "child_process";
 
 import settings from "./settings";
-import { recall, remember } from "./memory";
+import { forget, recall, remember } from "./memory";
 
 export function activate(context: vscode.ExtensionContext) {
+  let forgetLast = vscode.commands.registerCommand("testify.forgetLast", () => {
+    forget();
+  });
+
   let testFile = vscode.commands.registerCommand("testify.testFile", () => {
     let fileName = vscode.window.activeTextEditor?.document.fileName;
 
@@ -19,6 +23,8 @@ export function activate(context: vscode.ExtensionContext) {
 
     if (cmd) {
       run(cmd);
+    } else {
+      vscode.window.showErrorMessage("Testify: There's no last test to run.");
     }
   });
 
@@ -37,6 +43,7 @@ export function activate(context: vscode.ExtensionContext) {
     }
   });
 
+  context.subscriptions.push(forgetLast);
   context.subscriptions.push(testFile);
   context.subscriptions.push(testLast);
   context.subscriptions.push(testLine);
